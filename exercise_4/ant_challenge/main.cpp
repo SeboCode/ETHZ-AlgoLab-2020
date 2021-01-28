@@ -31,7 +31,6 @@ void testcase() {
         }
     }
     
-    std::vector<std::vector<edge_descriptor>> msts(s, std::vector<edge_descriptor>{});
     weighted_graph solutionGraph{};
     
     for (int i = 0; i < s; i++) {
@@ -43,12 +42,7 @@ void testcase() {
             int weight = boost::get(boost::edge_weight, graphs[i], edge);
             auto source = boost::source(edge, graphs[i]);
             auto target = boost::target(edge, graphs[i]);
-            auto edgetupple = boost::add_edge(source, target, weight, solutionGraph);
-            
-            if (!edgetupple.second) {
-                auto weightMap = boost::get(boost::edge_weight, solutionGraph);
-                weightMap[edgetupple.first] = std::min(weight, weightMap[edgetupple.first]);
-            }
+            boost::add_edge(source, target, weight, solutionGraph);
         }
     }
     
