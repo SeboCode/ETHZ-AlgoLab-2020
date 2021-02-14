@@ -21,8 +21,8 @@ void testcase() {
     for (auto biker : bikers) {
         while (true) {
             // The second check tests if the two bikers intersect. They don't
-            // intersect, if the biker with smaller starting point has a 
-            // slop than the one we look at (check all 4 cases).
+            // intersect, if and only if the biker with smaller starting point
+            // has a smaller slop than the one we look at (check all 4 cases).
             if (stack.empty() || stack.top().first <= std::get<1>(biker)) {
                 stack.push({std::get<1>(biker), std::get<2>(biker)});
                 break;
