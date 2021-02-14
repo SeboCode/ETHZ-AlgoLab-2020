@@ -75,7 +75,7 @@ void testcase() {
         jedies[i] = Jedi{a, b};
         
         segmentTable[a]++;
-        segmentTable[(b + 1) % (m+1)]--;
+        segmentTable[b]--;
     }
     
     int smallestSegmentIndex = -1;
