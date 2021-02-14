@@ -57,7 +57,6 @@ void testcase() {
     
     for (int i = 0; i < n; i++) {
         if (dfsValues[i] == -1) {
-            lowValues[i] = 0;
             dfs(i, -1);
         }
     }
