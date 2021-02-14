@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cstdlib>
 #include <iterator>
 
 void testcase() {
@@ -9,40 +8,30 @@ void testcase() {
     int k; std::cin >> k;
     std::vector<int> card_values{};
     std::copy_n(std::istream_iterator<int>(std::cin), n, std::back_inserter(card_values));
-    std::vector<int> sums{};
-    
-    sums.push_back(card_values[0]);
-    
-    for (int i = 1; i < n; i++) {
-        sums.push_back(sums[i-1] + card_values[i]);
-    }
-    
+    int left = 0;
+    int right = 1;
+    int current_sum = card_values[0];
     int start_index = 0;
     int end_index = 0;
-    int best_sum = -1;
+    int best_sum = current_sum;
     
-    int j = 0;
-    int i = 0;
-    
-    while (i < n && best_sum != k) {
-        int current_sum = 0;
-        
-        if (j == 0) {
-            current_sum = sums[i];
-        } else {
-            current_sum = sums[i] - sums[j-1];
-        }
-        
-        if (best_sum == -1 || std::abs(k - current_sum) < std::abs(k - best_sum)) {
-            start_index = j;
-            end_index = i;
+    while (right <= n && best_sum != k) {
+        if (std::abs(k - current_sum) < std::abs(k - best_sum)) {
+            start_index = left;
+            end_index = right-1;
             best_sum = current_sum;
         }
         
-        if (i == j || current_sum < k) {
-            i++;
-        } else if (current_sum > k) {
-            j++;
+        if (current_sum < k) {
+            if (right == n) {
+                break;
+            }
+            
+            current_sum += card_values[right];
+            right++;
+        } else {
+            current_sum -= card_values[left];
+            left++;
         }
     }
     
