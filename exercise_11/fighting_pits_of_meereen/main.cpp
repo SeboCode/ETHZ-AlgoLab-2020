@@ -28,8 +28,10 @@ struct State {
     void sendFighter(int fighterType, bool isNorth) {
         if (isNorth) {
             lastSentFightersNorth = ((lastSentFightersNorth << 8) & mask) + (fighterType & mask8);
+            gateDifference--;
         } else {
             lastSentFightersSouth = ((lastSentFightersSouth << 8) & mask) + (fighterType & mask8);
+            gateDifference++;
         }
     }
     
@@ -98,11 +100,9 @@ void testcase() {
         
         for (auto const & element : current) {
             State chooseNorthState(element.first);
-            chooseNorthState.gateDifference--;
             chooseNorthState.sendFighter(fighterType, true);
             storeBestExcitementScore(next, chooseNorthState, true, element.second);
             State chooseSouthState(element.first);
-            chooseSouthState.gateDifference++;
             chooseSouthState.sendFighter(fighterType, false);
             storeBestExcitementScore(next, chooseSouthState, false, element.second);
         }
