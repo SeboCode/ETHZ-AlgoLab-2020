@@ -48,10 +48,10 @@ void testcase(int n) {
     
     for (Vertex_iterator v = triangulation.finite_vertices_begin(); v != triangulation.finite_vertices_end(); v++) {
         Point currentPoint = v->point();
-        colisionRadius[i] = CGAL::squared_distance(Point(l, currentPoint.y()), currentPoint);
-        colisionRadius[i] = CGAL::min(colisionRadius[i], CGAL::squared_distance(Point(r, currentPoint.y()), currentPoint));
-        colisionRadius[i] = CGAL::min(colisionRadius[i], CGAL::squared_distance(Point(currentPoint.x(), b), currentPoint));
-        colisionRadius[i] = CGAL::min(colisionRadius[i], CGAL::squared_distance(Point(currentPoint.x(), t), currentPoint));
+        colisionRadius[i] = std::pow(currentPoint.x() - l, 2);
+        colisionRadius[i] = CGAL::min(colisionRadius[i], std::pow(currentPoint.y() - b, 2));
+        colisionRadius[i] = CGAL::min(colisionRadius[i], std::pow(r - currentPoint.x(), 2));
+        colisionRadius[i] = CGAL::min(colisionRadius[i], std::pow(t - currentPoint.y(), 2));
         Triangulation::Vertex_circulator c = triangulation.incident_vertices(v);
         
         // in case we only have one vertex
