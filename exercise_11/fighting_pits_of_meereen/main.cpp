@@ -29,7 +29,7 @@ struct State {
         if (isNorth) {
             lastSentFightersNorth = ((lastSentFightersNorth << 8) & mask) + (fighterType & mask8);
         } else {
-            lastSentFightersSouth = ((lastSentFightersSouth << 8) &  mask) + (fighterType & mask8);
+            lastSentFightersSouth = ((lastSentFightersSouth << 8) & mask) + (fighterType & mask8);
         }
     }
     
