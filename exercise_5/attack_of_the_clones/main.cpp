@@ -68,18 +68,22 @@ void testcase() {
     std::cin >> m;
     std::vector<Jedi> jedies(n);
     std::map<int, int> segmentTable{};
+    int countJedis = 0; // The initial value of this should be the amount of jedies protecting segment 0
     
     for (int i = 0; i < n; i++) {
         int a; std::cin >> a;
         int b; std::cin >> b;
         jedies[i] = Jedi{a, b};
         
+        if (inSegment(jedies[i], 0)) {
+            countJedis++;
+        }
+        
         segmentTable[a]++;
         segmentTable[b]--;
     }
     
     int smallestSegmentIndex = -1;
-    int countJedis = 0;
     int smallestSegmentJedisCount = n;
     
     for (std::pair<int, int> segment : segmentTable) {
