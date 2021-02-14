@@ -59,6 +59,9 @@ void testcase() {
         
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < s; j++) {
+                // Dijkstra stores INT_MAX in the distance map, if there is no
+                // connection between the two points. Therefore, this can lead
+                // to an overflow.
                 if (shelterDistances[i][j] + d <= 0) {
                     continue;
                 }
