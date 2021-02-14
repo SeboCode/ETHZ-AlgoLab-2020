@@ -31,26 +31,25 @@ void testcase() {
     for (std::vector<int> waterway : waterways) {
         int left = 0;
         int right = 0;
-        int usedSoldiers = requiredMen[waterway[left]];
+        int usedSoldiers = 0;
         
         // This loop looks at the maximum amount of islands we can conquer,
         // when we only look at the current waterway (including Pyke).
         while (right <= waterway.size()) {
             if (usedSoldiers >= k) {
                 if (usedSoldiers == k) {
-                    maxAttackableIslands = std::max(maxAttackableIslands, right - left + 1);
+                    maxAttackableIslands = std::max(maxAttackableIslands, right - left);
                 }
                 
                 usedSoldiers -= requiredMen[waterway[left]];
                 left++;
             } else {
-                right++;
-                
                 if (right == waterway.size()) {
                     break;
                 }
                 
                 usedSoldiers += requiredMen[waterway[right]];
+                right++;
             }
         }
         
