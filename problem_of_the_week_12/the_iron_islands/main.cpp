@@ -35,7 +35,7 @@ void testcase() {
         
         // This loop looks at the maximum amount of islands we can conquer,
         // when we only look at the current waterway (including Pyke).
-        while (left < waterway.size()) {
+        while (right <= waterway.size()) {
             if (usedSoldiers >= k) {
                 if (usedSoldiers == k) {
                     maxAttackableIslands = std::max(maxAttackableIslands, right - left + 1);
